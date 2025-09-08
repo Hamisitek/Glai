@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="padding: 20px; background-color: #ffe6e6; border: 1px solid #ff9999; border-radius: 8px;">
+    <h2 style="color: #cc0000;">Payment Error</h2>
+    <p>We were unable to process your payment. Please try again or contact support.</p>
+    <a href="{% url 'orders:checkout' %}" style="color: #0066cc; text-decoration: underline;">Go back to checkout</a>
+</div>
+{% endblock %}

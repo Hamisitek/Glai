@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block content %}
+<h1>Thank you for your order!</h1>
+<p>Your order ID is: <strong>#{{ order.id }}</strong></p>
+
+<h2>Order Details:</h2>
+<ul>
+    <li>Name: {{ order.first_name }} {{ order.last_name }}</li>
+    <li>Email: {{ order.email }}</li>
+    <li>Phone: {{ order.phone }}</li>
+    <li>Address: {{ order.address }}</li>
+    <li>Payment Method: {{ order.payment_method }}</li>
+    <li>Order Status: {% if order.paid %} Paid {% else %} Pending Payment {% endif %}</li>
+</ul>
+
+<h2>Items Ordered:</h2>
+<ul>
+    {% for item in order.items.all %}
+        <li>{{ item.product.name }} - {{ item.quantity }} x ${{ item.price }}</li>
+    {% endfor %}
+</ul>
+
+<strong>Total: TSHS {{ order.total_price }}</strong>
+
+<a href="{% url 'shop:product_list' %}">Continue Shopping</a>
+{% endblock %}

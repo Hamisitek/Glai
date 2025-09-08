@@ -1,0 +1,10 @@
+<form action="{% url 'orders:stripe_payment' order.id %}" method="post">
+    {% csrf_token %}
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="{{ stripe_key }}"
+        data-amount="{{ order.get_total_price|floatformat:2 }}"
+        data-name="My Shop"
+        data-description="Order Payment"
+        data-currency="usd">
+    </script>
+</form>

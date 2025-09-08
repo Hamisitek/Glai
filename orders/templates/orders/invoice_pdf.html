@@ -1,0 +1,171 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice #{{ order.id|stringformat:"04d" }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile support -->
+
+    <style>
+        body {
+            font-family: DejaVu Sans, sans-serif;
+            font-size: 11px;
+            margin: 30px;
+        }
+
+        .header, .footer {
+            text-align: center;
+        }
+
+        .company-details {
+            margin-top: 5px;
+            font-size: 10px;
+        }
+
+        .tin {
+            text-align: right;
+            font-size: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 5px;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #d4af37;
+        }
+
+        .total-row td {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+
+        .terms {
+            margin-top: 30px;
+            font-size: 10px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 5px;
+            font-size: 9px;
+        }
+
+        img.logo {
+            height: 50px;
+        }
+
+        /* Mobile Styles */
+        @media screen and (max-width: 600px) {
+            body {
+                margin: 10px;
+                font-size: 10px;
+            }
+
+            img.logo {
+                height: 40px;
+            }
+
+            .company-details, .tin, .terms, .footer {
+                font-size: 9px;
+            }
+
+            th, td {
+                font-size: 10px;
+                padding: 4px;
+            }
+
+            .header, .footer {
+                text-align: center;
+            }
+
+            table {
+                font-size: 10px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <img src="{{ logo_url }}" alt="Logo" class="logo"><br>
+    <div class="company-details">
+        <strong>Glai Export & Supply</strong><br>
+        Mikocheni, Dar es Salaam, Tanzania<br>
+        Phone: +255 752 904 157<br>
+        Email: info@glaiexportandsupply.online
+    </div>
+    <div class="tin">
+        <strong>TIN:</strong> 144-015-223
+    </div>
+</div>
+
+<!-- Invoice Info -->
+<h2 style="text-align:center;">Invoice #{{ order.id|stringformat:"04d" }}</h2>
+<p><strong>Name:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+<p><strong>Email:</strong> {{ order.email }}</p>
+<p><strong>Phone:</strong> {{ order.phone }}</p>
+<p><strong>Address:</strong> {{ order.address }}</p>
+<p><strong>Date:</strong> {{ now|date:"F j, Y" }}</p>
+
+<!-- Items Table -->
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price (Tsh)</th>
+            <th>Qty</th>
+            <th>Total (Tsh)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in order_items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.price|intcomma }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.get_cost|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr class="total-row">
+        <td colspan="3"><strong>Grand Total</strong></td>
+        <td>{{ order.get_total_price|intcomma }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Terms -->
+<div class="terms">
+    <p>Delivery within Dar es Salaam, 2–3 Hours, while out of Dar es Salaam 1–3 business days upon order confirmation, unless otherwise specified.</p>
+
+    <h4>Payment Terms</h4>
+    <p>Payment is due upon delivery. Late payments may attract additional charges unless prior arrangements are made.</p>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    Thank you for doing business with us!<br>
+    <p><strong>Location:</strong> Mikocheni, Dar es Salaam, Tanzania</p>
+    <p><strong>Phone:</strong> +255 752 904 157</p>
+    <p><strong>WhatsApp:</strong> +255 752 904 157</p>
+    <p><strong>Instagram:</strong> @glai_exportsnsupply</p>
+    <p>&copy; {{ now|date:"Y" }} Glai Export & Supply™. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

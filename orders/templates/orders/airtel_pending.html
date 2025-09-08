@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize math_filters %}
+
+{% block title %}Airtel Money Payment{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --black: #121212;
+        --gold: #FFD700;
+        --green: #00FF66;
+        --light-gray: #f8f9fa;
+    }
+
+    .payment-container {
+        background-color: var(--light-gray);
+        border: 1px solid var(--gold);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        max-width: 900px;
+        margin: 2rem auto;
+    }
+
+    h1 {
+        color: var(--black);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+        border-radius: 5%;
+    }
+    th, td {
+        border: 1px solid var(--gold);
+        padding: 0.75rem;
+        text-align: left;
+    }
+    th {
+        background-color: var(--gold);
+        color: var(--black);
+    }
+    td {
+        background-color: #fff;
+    }
+
+    .total-pill {
+        display: inline-block;
+        background-color: rgba(255, 215, 0, 0.2);
+        padding: 0.5rem 1.2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        text-align: center;
+        margin: 1rem auto;
+        color: var(--black);
+    }
+
+    .btn-primary, .btn-invoice {
+        background-color: var(--gold);
+        color: var(--black);
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-primary:hover, .btn-invoice:hover {
+        background-color: var(--green);
+        color: #fff;
+    }
+
+  .logo-wrapper {
+        border: 2px solid var(--gold);
+        border-radius: 5%;
+        padding: 5px;
+        display: inline-block;
+        margin: 0 auto 1rem auto;
+        background: #fff;
+    }
+    .logo {
+        max-height: 60px;
+        display: block;
+    }
+
+
+    .text-center { text-align: center; }
+
+    @media (max-width: 767px) {
+        .payment-container { padding: 1rem; }
+        th, td { font-size: 0.9rem; padding: 0.5rem; }
+        .total-pill { font-size: 1rem; padding: 0.4rem 1rem; }
+    }
+</style>
+
+<div class="payment-container">
+    <div class="logo-wrapper text-center">
+        <img src="{% static 'images/airtel-money-uganda-seeklogo.png' %}" alt="Airtel Money" class="logo">
+    </div>
+
+    <h1>Hello {{ order.first_name }}!</h1>
+    <p class="text-center mb-4">Your Airtel Money Payment for Order Number: <strong>{{ order.id }}</strong></p>
+
+    <!-- Payment Instructions -->
+    <p class="text-center text-lg mb-4" style="color: #00FF66; font-weight: bold;">
+    Order accepted
+</p>
+
+    <p class="text-center mb-6">
+        Please make the payment using our <strong>Airtel Money Lipa number 123456</strong>.<br>
+        Keep your receipt for reconciliation.<br>
+        Thank you for doing business with <strong>Glai</strong>.
+    </p>
+
+    <!-- Order Items Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price (TZS)</th>
+                <th>Quantity</th>
+                <th>Total (TZS)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.price|intcomma }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price|mul:item.quantity|intcomma }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-center">No items found</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Total Pill -->
+    <div class="text-center">
+        <span class="total-pill">Total: TZS {{ order.get_total_price|intcomma }}</span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="text-center mt-4">
+        <a href="{% url 'orders:invoice' order.id %}" class="btn-invoice me-2">📄 View Invoice</a>
+        <a href="{% url 'shop:product_list' %}" class="btn-primary">⬅ Back to Products</a>
+    </div>
+</div>
+{% endblock %}

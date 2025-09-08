@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Confirmation{% endblock %}
+
+{% block content %}
+<h1>Confirm Your Payment</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Payment</button>
+</form>
+{% endblock %}

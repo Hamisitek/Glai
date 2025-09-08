@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Track Your Order{% endblock %}
+
+{% block content %}
+<h1>Track Your Order</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="order_id">Order ID:</label>
+    <input type="text" name="order_id" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">Track</button>
+</form>
+
+{% if order %}
+    <h2>Order Status: {{ order.get_status_display }}</h2>
+    <ul>
+        <li>Name: {{ order.first_name }} {{ order.last_name }}</li>
+        <li>Email: {{ order.email }}</li>
+        <li>Order Status: {{ order.get_status_display }}</li>
+        <li>Payment Status: {% if order.paid %} Paid {% else %} Pending {% endif %}</li>
+    </ul>
+{% elif request.method == "POST" %}
+    <p>No order found with the provided details.</p>
+{% endif %}
+{% endblock %}

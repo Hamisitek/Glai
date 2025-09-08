@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-dark text-white text-center rounded-top-4">
+                    <h3 class="mb-0">🧾 Checkout</h3>
+                </div>
+                <div class="card-body bg-light rounded-bottom-4">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                           {% if field.name != 'payment_method' and field.name != 'bank_name' %}
+                                <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}" class="form-label fw-semibold">
+                                        {{ field.label }}
+                                    </label>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <div class="text-danger small">{{ field.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        <!-- Payment Method Section -->
+                        <div class="mb-4">
+   <style>
+    .payment-logo {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 6px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-check-label {
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .form-check {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<div class="mb-4">
+    <label class="form-label fw-semibold">Select Payment Method</label>
+
+    <div class="form-check d-flex align-items-center">
+        <input class="form-check-input me-2" type="radio" name="payment_method" id="mpesa" value="mpesa" required onchange="toggleBankSelect()">
+        <label class="form-check-label" for="mpesa">
+            <img src="{% static 'images/m-pesa-seeklogo.png' %}" alt="M-Pesa" class="payment-logo">
+            Vodacom M-Pesa
+        </label>
+    </div>
+
+    <div class="form-check d-flex align-items-center">
+        <input class="form-check-input me-2" type="radio" name="payment_method" id="mixx" value="mixx" onchange="toggleBankSelect()">
+        <label class="form-check-label" for="mixx">
+            <img src="{% static 'images/mixx-by-yas-seeklogo.png' %}" alt="Mixx by YAS" class="payment-logo">
+            Mixx by YAS
+        </label>
+    </div>
+
+    <div class="form-check d-flex align-items-center">
+        <input class="form-check-input me-2" type="radio" name="payment_method" id="airtel" value="airtel" onchange="toggleBankSelect()">
+        <label class="form-check-label" for="airtel">
+            <img src="{% static 'images/airtel-money-uganda-seeklogo.png' %}" alt="Airtel Money" class="payment-logo">
+            Airtel Money
+        </label>
+    </div>
+
+    <div class="form-check d-flex align-items-center">
+        <input class="form-check-input me-2" type="radio" name="payment_method" id="bank" value="bank" onchange="toggleBankSelect()">
+        <label class="form-check-label" for="bank">
+            <img src="{% static 'images/bank.png' %}" alt="Bank Transfer" class="payment-logo">
+            Bank Transfer
+        </label>
+    </div>
+</div>
+
+
+                            <!-- Bank dropdown only shows if Bank Transfer is selected -->
+                            <div class="mt-3" id="bank-select" style="display: none;">
+                                <label for="bank_name" class="form-label fw-semibold">Select Bank</label>
+                                <select name="bank_name" id="bank_name" class="form-select">
+                                    <option value="">-- Choose Bank --</option>
+                                    <option value="CRDB">CRDB</option>
+                                    <option value="NMB">NMB</option>
+                                    <option value="NBC">NBC</option>
+                                    <option value="TCB">TCB</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 fw-bold rounded-pill">Place Order</button>
+                        
+                    </form>
+
+                    <script>
+                        function toggleBankSelect() {
+                            const selected = document.querySelector('input[name="payment_method"]:checked')?.value;
+                            const bankSelect = document.getElementById('bank-select');
+                            const bankName = document.getElementById('bank_name');
+
+                            if (selected === 'bank') {
+                                bankSelect.style.display = 'block';
+                                bankName.required = true;
+                            } else {
+                                bankSelect.style.display = 'none';
+                                bankName.required = false;
+                                bankName.value = '';
+                            }
+                        }
+
+                        document.addEventListener("DOMContentLoaded", toggleBankSelect);
+                    </script>
+                </div>
+                
+                <div class="card shadow-sm p-3 cart-card">
+                    <a href="{% url 'cart:cart_detail' %}" class="btn btn-outline-secondary rounded-pill">
+                        ⬅ Back to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control, .form-select {
+        border-radius: 1rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ced4da;
+    }
+
+    .btn-primary {
+        background-color: green;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0c0;
+    }
+
+    .btn-outline-secondary {
+        border-color: gold;
+        color: gold;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: gold;
+        color: black;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Stripe Payment Pending{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <div class="bg-black text-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-gold mb-4">Stripe Payment Pending</h1>
+        <p>Thank you for your order, <strong>{{ order.first_name }}</strong>!</p>
+        <p>Order ID: <strong>{{ order.id }}</strong></p>
+        <p>Status: <strong>{{ payment.status|capfirst }}</strong></p>
+        <p class="mt-4">We have initiated the Stripe payment. Complete the payment in the Stripe checkout page.</p>
+        <a href="{% url 'orders:order_success' %}" class="inline-block mt-6 bg-gold text-black font-bold py-2 px-4 rounded hover:bg-yellow-600">Go to Success Page</a>
+    </div>
+</div>
+{% endblock %}
