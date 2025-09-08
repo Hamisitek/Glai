@@ -1,0 +1,200 @@
+{% load static %}
+{% load tz %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>{% block title %}Glai Export & Supply{% endblock %}</title>
+
+    <style>
+        /* Theme Colors */
+        :root {
+            --black: #000000;
+            --gold: #d4af37;
+            --green: #228B22;
+            --grayish: #f0f0f0;
+            --light-gray-bg: #f9f9f9;
+        }
+    
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+    
+        .logo-img {
+            height: 90px;
+            width: auto;
+            border: 1px solid var(--gold);
+            border-radius: 0.5rem;
+            padding: 0.25rem;
+            background-color: #ffffff;
+}
+
+    
+        /* Navigation Bar Theme */
+        .navbar {
+            background-color: var(--grayish) !important;
+            border: 2px solid var(--gold);
+            /*border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);*/
+            border-radius: 0.5rem;
+        }
+
+        .navbar .container {
+            border: 1px solid var(--gold) !important;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--grayish); /* Keeps it matching the navbar background */
+}
+
+    
+        .navbar-nav .nav-link {
+            color: var(--black) !important;
+            font-weight: bold;
+            border: 1px solid transparent;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            transition: 0.2s ease-in-out;
+        }
+    
+        .navbar-nav .nav-link:hover {
+            color: var(--green) !important;
+            border-color: gold; /* or your preferred hover color */
+            background-color: goldenrod; /* subtle gold background on hover */
+        }
+    
+        /* Page Background */
+        body, nav, .container, main {
+            background-color: var(--light-gray-bg) !important;
+        }
+    
+        /* Global Border Color and Width */
+        * {
+            border-color: var(--gold) !important;
+            border-width: 1px !important;
+        }
+    
+        /* Specific Element Styling */
+        .card {
+            border: 1px solid var(--gold) !important;
+            background-color: #ffffff;
+        }
+    
+        .form-control,
+        .btn,
+        .table,
+        .dropdown-menu,
+        .modal-content {
+            border: 1px solid var(--gold) !important;
+        }
+    
+        /* Optional rounded corners */
+        .card,
+        .form-control,
+        .btn {
+            border-radius: 0.5rem;
+        }
+    </style>
+    
+    
+    
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="{% url 'shop:product_list' %}">
+                    <img src="{% static 'images/logo.jpg' %}" alt="Glai Export & Supply Logo" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="ms-auto">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:product_list' %}">My Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'cart:cart_detail' %}">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:about' %}">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+<!-- Footer Section -->
+ 
+<footer id="footer-contact" class="footer">
+    <div class="footer-content">
+        <p><strong>Location:</strong> Kigamboni, Dar es Salaam, Tanzania</p>
+        <p><strong>Email:</strong> <a href="mailto:Glaiexportandsupply@gmail.com">Glaiexportandsupply@gmail.com</a></p>
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/glai_exportsnsupply" target="_blank">@glai_exportsnsupply</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+255752904157">+255 752 904 157</a></p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/255752904157" target="_blank">Chat with us</a></p>
+        <p>&copy; {% now "Y" %} Glai Export & Supply™. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+
+<style>
+    .footer {
+        background-color: #0a0; /* green */
+        color: #fff;
+        text-align: center;
+        padding: 20px 10px;
+        font-size: 14px;
+        margin-top: 60px;
+    }
+
+    .footer a {
+        color: #ffd700; /* gold */
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+    }
+
+    .whatsapp-float img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 600px) {
+        .footer {
+            font-size: 13px;
+            padding: 15px 5px;
+        }
+
+        .whatsapp-float img {
+            width: 45px;
+            height: 45px;
+        }
+    }
+</style>

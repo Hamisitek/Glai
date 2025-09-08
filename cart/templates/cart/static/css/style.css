@@ -1,0 +1,109 @@
+/* static/css/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Header styling */
+header {
+    background-color: #000; /* Black */
+    color: gold;
+    padding: 10px 0;
+}
+
+/* Navigation bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+nav a {
+    color: gold;
+    text-decoration: none;
+    padding: 8px 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #000; /* Black */
+    color: gold;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Main container */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* Card quantity control input */
+.card .input-group input {
+    max-width: 100px;
+}
+
+/* Button and input theme override */
+.btn-outline-secondary {
+    border-color: gold !important;
+    color: gold !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: gold !important;
+    color: #000 !important;
+}
+
+.btn-success {
+    background-color: green !important;
+    border-color: green !important;
+    color: #fff !important;
+}
+
+.btn-success:hover {
+    background-color: #0c0 !important;
+}
+
+.btn-danger {
+    background-color: #0f0 !important;
+    border-color: #0f0 !important;
+    color: #000 !important;
+}
+
+.btn-danger:hover {
+    background-color: #0c0 !important;
+}
+
+/* Card styling */
+.cart-card {
+    background-color: #fff;
+    border: 2px solid gold;
+    border-radius: 1rem;
+    color: #000;
+}
+
+.cart-card h5 a {
+    color: gold;
+}
+
+.cart-card strong {
+    color: green;
+}
+
+/* Version bump for production */
