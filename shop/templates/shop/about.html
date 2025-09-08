@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Us - Glai Exports and Supply{% endblock %}
+
+{% block content %}
+<style>
+  :root {
+    --black: #000000;
+    --gold: #d4af37;
+    --green: #228B22;
+  }
+
+  /* Container */
+  .container.my-5 {
+    background-color: #f8f9fa; /* light gray */
+    border: 1px solid var(--gold);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+
+  /* Headings */
+  h1.fw-bold.text-primary {
+    color: var(--black);
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  p.text-muted {
+    color: var(--green);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  /* CEO Section */
+  section.container.my-5 {
+    background-color: #ffffff;
+    border: 1px solid var(--gold);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+  }
+
+  h2.text-center.mb-4 {
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  img.rounded-circle.mb-3 {
+    border: 3px solid var(--gold);
+  }
+
+  h5.fw-bold.mt-2 {
+    color: var(--black);
+    font-weight: 700;
+  }
+  p.text-muted {
+    color: var(--green);
+  }
+
+  .btn-outline-primary {
+    border-color: var(--green);
+    color: var(--green);
+    font-weight: 600;
+  }
+  .btn-outline-primary:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+  }
+
+  blockquote.blockquote {
+    border-left-color: var(--gold) !important;
+    background-color: #fff9e6;
+    color: var(--black);
+  }
+  blockquote.blockquote-footer {
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* Feature icons */
+  .bi-check-circle-fill.text-success {
+    color: var(--green) !important;
+  }
+
+  /* Partner section */
+  .mt-5.text-center h3.fw-bold.text-secondary {
+    color: var(--black);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .mt-5.text-center p {
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  .btn-primary.btn-lg {
+    background-color: var(--green);
+    border: 2px solid var(--gold);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease;
+  }
+  .btn-primary.btn-lg:hover {
+    background-color: var(--gold);
+    color: var(--black);
+    border-color: var(--green);
+  }
+  html {
+    scroll-behavior: smooth;
+}
+
+
+</style>
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-primary">About Us</h1>
+        <p class="text-muted">Bridging Tanzania to the Global Market</p>
+    </div>
+    
+    <div class="row align-items-center">
+        <div class="col-md-5 text-center">
+            <img src="{% static 'images/glai.jpg' %}" alt="Glai Export & Supply Logo" class="img-fluid rounded shadow-sm" style="max-width: 90%; border: 3px solid var(--gold);">
+        </div>
+        <div class="col-md-7">
+            <p class="lead">
+                At <strong>Glai Exports and Supply</strong>, we are committed to showcasing Tanzania’s exceptional quality, creativity, and work ethic. Our mission is to be your trusted partner in procurement, ensuring businesses, organizations, and government institutions receive the best products—efficiently and on time.
+            </p>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="fw-bold text-secondary">Why Choose Us?</h3>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="d-flex align-items-start mb-3">
+                    <i class="bi bi-check-circle-fill text-success fs-4 me-3"></i>
+                    <p><strong>Diverse Product Range</strong> – From office essentials to industrial equipment, we supply it all.</p>
+                </div>
+                <div class="d-flex align-items-start mb-3">
+                    <i class="bi bi-check-circle-fill text-success fs-4 me-3"></i>
+                    <p><strong>Reliable & Timely Delivery</strong> – We ensure fast, on-schedule supply to keep your operations running.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-start mb-3">
+                    <i class="bi bi-check-circle-fill text-success fs-4 me-3"></i>
+                    <p><strong>Sustainability & Quality</strong> – Ethical sourcing and top-tier products you can trust.</p>
+                </div>
+                <div class="d-flex align-items-start mb-3">
+                    <i class="bi bi-check-circle-fill text-success fs-4 me-3"></i>
+                    <p><strong>Empowering Local Communities</strong> – Supporting Tanzanian businesses and improving livelihoods.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="container my-5 px-3 px-md-5">
+      <div class="bg-light p-4 p-md-5 rounded shadow-sm">
+        <h2 class="text-center mb-4">Message from the CEO</h2>
+    
+        <div class="text-center">
+          <img src="{% static 'images/ceo.jpg' %}" alt="Gladness Malya" class="rounded-circle mb-3 shadow" style="width: 100px; height: 100px; object-fit: cover; border: 3px solid var(--gold);">
+          <h5 class="fw-bold mt-2">Gladness L. Mallya</h5>
+          <p class="text-muted mb-2">Chief Executive Officer</p>
+    
+          <div class="mb-3">
+            <a href="https://tz.linkedin.com/in/glai-export-and-supply-437424330" class="me-2 text-dark" title="LinkedIn"><i class="bi bi-linkedin fs-4"></i></a>
+            <a href="mailto:Glaiexportandsupply@gmail.com" class="text-dark" title="Email"><i class="bi bi-envelope fs-4"></i></a>
+          </div>
+        </div>
+    
+        <div class="text-center">
+          <button class="btn btn-outline-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#ceoMessage" aria-expanded="false" aria-controls="ceoMessage">
+            Read Message
+          </button>
+        </div>
+    
+        <div class="collapse" id="ceoMessage">
+          <blockquote class="blockquote text-center bg-white p-3 p-md-4 rounded shadow-sm border-start border-5 border-primary">
+            <p class="mb-3 small small-md">
+              “At Glai Exports and Supply, we are driven by a powerful vision to bridge the gap between Tanzania and the global market.
+              Our business is rooted in the heart of Africa, where the richness of Tanzanian culture, products, and talent have long been underestimated.
+              <br><br>
+              Glai Exports and Supply aims to change that narrative by showcasing the exceptional quality, creativity, and work ethic of Tanzanians.
+              We are proud to be part of a growing movement that empowers local communities with incredible potential and increases the standard of living.
+              <br><br>
+              Glai Exports and Supply takes pride in providing sustainably in the customer satisfaction, by being the best qualified company with the most amazing and on-time delivery.”
+            </p>
+            <footer class="blockquote-footer mt-3">Gladness L. Mallya</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+    
+    
+    <div class="mt-5 text-center p-5 rounded" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0);border: 2px solid #FFD700; ">
+    <h3 class="fw-bold text-secondary">Partner with Us Today</h3>
+    <p class="mb-4">We are proud to be part of a growing movement that empowers local talent, raises industry standards, and ensures customer satisfaction through quality, efficiency, and integrity.</p>
+
+    <!-- Button triggers modal -->
+    <button type="button" class="btn btn-gold btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#contactModal" style="color: #000; font-weight: bold;">
+        📞 Get in Touch
+    </button>
+</div>
+
+<!-- Contact Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: #121212; color: #fff; border: 2px solid #FFD700;">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title fw-bold text-gold" id="contactModalLabel">Contact Us</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        <p><strong>Location:</strong> Kigamboni, Dar es Salaam, Tanzania</p>
+        <p><strong>Email:</strong> <a href="mailto:Glaiexportandsupply@gmail.com" class="text-green">Glaiexportandsupply@gmail.com</a></p>
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/glai_exportsnsupply" target="_blank" class="text-green">@glai_exportsnsupply</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+255752904157" class="text-green">+255 752 904 157</a></p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/255752904157" target="_blank" class="text-green">Chat with us</a></p>
+      </div>
+      <div class="modal-footer border-top-0">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Colors -->
+<style>
+    .text-gold { color: #FFD700 !important; }
+    .btn-gold { background-color: #FFD700; border-color: #FFD700; }
+    .btn-gold:hover { background-color: #FFC700; border-color: #FFC700; }
+    .text-green { color: #00FF66 !important; text-decoration: none; }
+    .text-green:hover { color: #00CC52; text-decoration: underline; }
+</style>
+
+    
+</div>
+{% endblock %}
+

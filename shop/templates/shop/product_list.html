@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+<!-- Alpine.js for Slideshow -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<style>
+    :root {
+        --black: #000000;
+        --gold: #d4af37;
+        --green: #228B22;
+    }
+
+    .container.mt-4 {
+        background-color: #f8f9fa;
+        border: 1px solid var(--gold);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+
+    h1 {
+        color: var(--black);
+        font-weight: 700;
+    }
+
+    form.d-flex input.form-control {
+        border: 1px solid var(--gold);
+        border-radius: 0.25rem 0 0 0.25rem;
+    }
+
+    form.d-flex button.btn-primary {
+        background-color: var(--green);
+        border: 1px solid var(--gold);
+        color: white;
+        border-radius: 0 0.25rem 0.25rem 0;
+    }
+
+    form.d-flex button.btn-primary:hover {
+        background-color: var(--gold);
+        color: var(--black);
+        border-color: var(--green);
+    }
+
+    ul.list-group-horizontal {
+        border-bottom: 1px solid var(--gold);
+        padding-bottom: 0.5rem;
+    }
+
+    ul.list-group-horizontal li.list-group-item {
+        border: 1px solid var(--gold);
+        margin-right: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: white;
+        white-space: nowrap;
+    }
+
+    ul.list-group-horizontal li.list-group-item a {
+        color: var(--black);
+        font-weight: 600;
+    }
+
+    ul.list-group-horizontal li.list-group-item a:hover {
+        color: var(--gold);
+        text-decoration: underline;
+    }
+
+    .card {
+        border: 1px solid var(--gold);
+        border-radius: 0.5rem;
+        box-shadow: 0 0 6px rgba(212, 175, 55, 0.2);
+        transition: transform 0.2s ease-in-out;
+        background-color: #ffffff;
+        color: var(--black);
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+    }
+
+    .card-title {
+        font-weight: 700;
+        color: var(--black);
+    }
+
+    .card-text {
+        color: var(--gold);
+        font-weight: 600;
+    }
+
+    .btn-primary {
+        background-color: var(--green);
+        border: 1px solid var(--gold);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--gold);
+        color: var(--black);
+        border-color: var(--green);
+    }
+
+    .pagination .page-link {
+        border: 1px solid var(--gold);
+        color: var(--black);
+        font-weight: 600;
+    }
+
+    .pagination .page-link:hover {
+        background-color: var(--gold);
+        color: var(--black);
+        border-color: var(--green);
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: var(--gold);
+        border-color: var(--gold);
+        color: var(--black);
+        font-weight: 700;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        color: #6c757d;
+        border-color: var(--gold);
+    }
+</style>
+
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Products</h1>
+
+    <!-- Search Bar -->
+    <form method="GET" class="d-flex mb-3">
+        <input type="text" name="q" class="form-control me-2" placeholder="Search products..." value="{{ search_query }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Category Filtering -->
+    <h3>Filter by Category:</h3>
+    <ul class="list-group list-group-horizontal mb-4 overflow-auto flex-nowrap">
+        <li class="list-group-item"><a href="{% url 'shop:product_list' %}" class="text-decoration-none">All</a></li>
+        {% for category in categories %}
+            <li class="list-group-item">
+                <a href="{% url 'shop:product_list' %}?category={{ category.id }}" class="text-decoration-none">{{ category.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+    <!-- Product Grid -->
+    <div class="row">
+        {% for product in page_obj %}
+        <div class="col-md-4 mb-4">
+    <a href="{% url 'shop:product_detail' product.id %}" class="text-decoration-none text-dark">
+        <div class="card h-100 shadow-sm">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            {% else %}
+                <img src="https://via.placeholder.com/200" class="card-img-top" alt="No Image">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text mb-0">Price: TZS {{ product.price|intcomma }}</p>
+            </div>
+        </div>
+    </a>
+</div>
+
+        {% endfor %}
+    </div>
+
+    <!-- Pagination Controls -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}
